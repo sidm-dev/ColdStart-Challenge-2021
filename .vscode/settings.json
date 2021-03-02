@@ -1,5 +1,5 @@
 {
     "staticWebApps.appSubpath": "challenges\\challenge1\\starter\\coldstartapp\\vue-app",
-    "staticWebApps.apiSubpath": "",
-    "staticWebApps.outputSubpath": "build"
+    "staticWebApps.apiSubpath": "challenges/challenge1/starter/coldstartapp/api",
+    "staticWebApps.outputSubpath": "dist"
 }
