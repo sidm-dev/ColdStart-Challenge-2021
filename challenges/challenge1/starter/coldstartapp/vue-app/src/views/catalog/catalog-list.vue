@@ -36,11 +36,10 @@ export default {
     <div v-if="errorMessage">{{ errorMessage }}</div>
     <div v-if="!icecreams.length && !errorMessage">
       Loading data ...
-      <AuthLogin v-if="!user" provider="google">Google</AuthLogin>
     </div>
     <div class="container">
-      <AuthLogin v-if="!user" provider="google">Login using Google</AuthLogin>
-      <AuthLogout v-if="user">Logout</AuthLogout>
+      <AuthLogin provider="google">Login using Google</AuthLogin>
+      <AuthLogout>Logout</AuthLogout>
       <div
         v-for="(icecream) in icecreams"
       :key="icecream.Id"
