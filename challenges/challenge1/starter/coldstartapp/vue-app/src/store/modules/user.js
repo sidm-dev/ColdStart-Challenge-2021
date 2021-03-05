@@ -1,7 +1,4 @@
-import axios from 'axios';
-import API from '../config';
-import { parseList } from './action-utils';
-import GET_CATALOG from './mutation-types';
+import { SET_USER } from './mutation-types';
 
 const captains = console;
 
@@ -17,7 +14,7 @@ export default {
     },
   },
   actions: {
-    async setUserAction({ payload }) {
+    async setUserAction({ commit, payload }) {
       try {
         commit(SET_USER, payload);
         return payload;
