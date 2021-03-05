@@ -63,14 +63,14 @@ export default {
 
 <template>
   <div>
-    <div v-if="!this.user.userDetails">
+    <div v-if="!this.user?.userDetails">
       <AuthLogin provider="aad"></AuthLogin>
       <AuthLogin provider="facebook"></AuthLogin>
       <AuthLogin provider="github"></AuthLogin>
       <AuthLogin provider="google"></AuthLogin>
       <AuthLogin provider="twitter"></AuthLogin>
     </div>
-    <AuthLogout v-if="this.user.userDetails">Logout</AuthLogout>
+    <AuthLogout v-if="this.user?.userDetails">Logout</AuthLogout>
     <div v-if="errorMessage">{{ errorMessage }}</div>
     <div v-if="!icecreams.length && !errorMessage">
       Loading data ...
