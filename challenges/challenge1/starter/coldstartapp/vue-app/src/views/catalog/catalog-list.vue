@@ -38,8 +38,8 @@ export default {
       Loading data ...
     </div>
     <div class="container">
-      <AuthLogin provider="google">Login using Google</AuthLogin>
-      <AuthLogout>Logout</AuthLogout>
+      <AuthLogin v-if="!user" provider="google">Login using Google</AuthLogin>
+      <AuthLogout v-if="user">Logout</AuthLogout>
       <div
         v-for="(icecream) in icecreams"
       :key="icecream.Id"
