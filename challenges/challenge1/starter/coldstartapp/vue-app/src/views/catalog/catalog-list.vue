@@ -25,6 +25,19 @@ export default {
   data() {
     return {
       user: '',
+      /*
+      PreOrder Doc:
+        {
+            "Id": "0B476647-586A-EB11-9889-000D3AB17657",
+            "User": "Pip Doe",
+            "Date": "2021-02-08T21:54:56.260Z",
+            "IcecreamId": 1,
+            "Status": "New",
+            "DriverId": null,
+            "FullAddress": "1 Microsoft Way, Redmond, WA 98052, USA",
+            "LastPosition": null
+        }
+      */
     };
   },
   async created() {
@@ -50,13 +63,20 @@ export default {
 
 <template>
   <div>
-    <AuthLogin v-if="!this.user.userDetails" provider="google">Login using Google</AuthLogin>
+    <div v-if="!this.user.userDetails">
+      <AuthLogin provider="aad"></AuthLogin>
+      <AuthLogin provider="facebook"></AuthLogin>
+      <AuthLogin provider="github"></AuthLogin>
+      <AuthLogin provider="google"></AuthLogin>
+      <AuthLogin provider="twitter"></AuthLogin>
+    </div>
+    
     <AuthLogout v-if="this.user.userDetails">Logout</AuthLogout>
     <div v-if="errorMessage">{{ errorMessage }}</div>
-    <div v-if="!icecreams.length && !errorMessage && this.user.userDetails">
+    <div v-if="!icecreams.length && !errorMessage">
       Loading data ...
     </div>
-    <div class="container" v-if="this.user.userDetails">
+    <div class="container">
       <div
         v-for="(icecream) in icecreams"
       :key="icecream.Id"
