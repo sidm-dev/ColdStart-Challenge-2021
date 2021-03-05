@@ -1,5 +1,8 @@
 <script>
 import CardContent from '@/components/card-content.vue';
+import AuthLogin from '@/components/auth-login.vue';
+import AuthLogout from '@/components/auth-logout.vue';
+import getUserInfo from '../../assets/js/userInfo';
 
 export default {
   name: 'CatalogList',
@@ -15,9 +18,12 @@ export default {
   },
   components: {
     CardContent,
+    AuthLogin,
+    AuthLogout,
   },
   data() {
     return {
+      user: getUserInfo(),
     };
   },
   methods: {
@@ -30,12 +36,15 @@ export default {
     <div v-if="errorMessage">{{ errorMessage }}</div>
     <div v-if="!icecreams.length && !errorMessage">
       Loading data ...
+      <AuthLogin v-if="!user" provider="google">Google</AuthLogin>
     </div>
     <div class="container">
+      <AuthLogin v-if="!user" provider="google">Login using Google</AuthLogin>
+      <AuthLogout v-if="user">Logout</AuthLogout>
       <div
         v-for="(icecream) in icecreams"
-        :key="icecream.Id"
-        role="presentation"
+      :key="icecream.Id"
+      role="presentation"
       >
         <div class="card">
           <CardContent

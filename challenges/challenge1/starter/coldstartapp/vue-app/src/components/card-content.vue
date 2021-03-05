@@ -36,5 +36,6 @@ export default {
       </div>
       <p class="description">{{ description }}</p>
     </div>
+    <button class="Button">Pre-Order</button>
   </div>
 </template>
