@@ -1,4 +1,5 @@
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import CardContent from '@/components/card-content.vue';
 import AuthLogin from '@/components/auth-login.vue';
 import AuthLogout from '@/components/auth-logout.vue';
@@ -27,9 +28,22 @@ export default {
     };
   },
   async created() {
-    this.user = await getUserInfo().userDetails;
+    await this.upDateUser();
+  },
+  computed: {
+    ...mapGetters('user', { user: 'user' }),
   },
   methods: {
+    ...mapActions('user', ['setUserAction']),
+    async upDateUser() {
+      this.user = await getUserInfo();
+      this.errorMessage = undefined;
+      try {
+        await this.setUserAction(this.user);
+      } catch (error) {
+        this.errorMessage = 'Unauthorized';
+      }
+    },
   },
 };
 </script>
