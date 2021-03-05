@@ -70,7 +70,6 @@ export default {
       <AuthLogin provider="google"></AuthLogin>
       <AuthLogin provider="twitter"></AuthLogin>
     </div>
-    
     <AuthLogout v-if="this.user.userDetails">Logout</AuthLogout>
     <div v-if="errorMessage">{{ errorMessage }}</div>
     <div v-if="!icecreams.length && !errorMessage">
