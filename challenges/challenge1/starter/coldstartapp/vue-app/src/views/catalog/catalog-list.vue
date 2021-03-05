@@ -27,7 +27,7 @@ export default {
     };
   },
   async created() {
-    user = await getUserInfo().userDetails;
+    this.user = await getUserInfo().userDetails;
   },
   methods: {
   },
