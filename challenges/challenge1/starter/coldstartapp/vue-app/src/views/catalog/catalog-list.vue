@@ -50,14 +50,13 @@ export default {
 
 <template>
   <div>
+    <AuthLogin v-if="!this.user.userDetails" provider="google">Login using Google</AuthLogin>
+    <AuthLogout v-if="!this.user.userDetails">Logout</AuthLogout>
     <div v-if="errorMessage">{{ errorMessage }}</div>
-    <div v-if="!icecreams.length && !errorMessage">
+    <div v-if="!icecreams.length && !errorMessage && this.user.userDetails">
       Loading data ...
     </div>
-    <div class="container">
-      <h1>xxxxxxxxxx{{user}}</h1>
-      <AuthLogin provider="google">Login using Google</AuthLogin>
-      <AuthLogout>Logout</AuthLogout>
+    <div class="container" v-if="this.user.userDetails">
       <div
         v-for="(icecream) in icecreams"
       :key="icecream.Id"
