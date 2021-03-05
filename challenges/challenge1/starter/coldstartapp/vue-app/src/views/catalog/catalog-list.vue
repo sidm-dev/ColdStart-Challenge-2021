@@ -38,7 +38,7 @@ export default {
       Loading data ...
     </div>
     <div class="container">
-      <h1>{{user.userDetails}}</h1>
+      <h1>xxxxxxxxxx{{user.userDetails}}</h1>
       <AuthLogin provider="google">Login using Google</AuthLogin>
       <AuthLogout>Logout</AuthLogout>
       <div
