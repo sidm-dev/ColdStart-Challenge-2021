@@ -9,8 +9,7 @@ export default {
   },
   methods: {
     goAuth() {
-      const { pathname } = window.location;
-      const redirect = `post_login_redirect_uri=${pathname}`;
+      const redirect = `post_login_redirect_uri=/`;
       const url = `/.auth/login/${this.provider}?${redirect}`;
       window.location.href = url;
     },
