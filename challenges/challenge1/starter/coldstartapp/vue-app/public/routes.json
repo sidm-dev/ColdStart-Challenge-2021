@@ -2,9 +2,6 @@
   "routes": [
     {
       "route": "/api/catalog",
-      "allowedRoles": [
-        "authenticated"
-      ]
     },
     {
       "route": "/*",
