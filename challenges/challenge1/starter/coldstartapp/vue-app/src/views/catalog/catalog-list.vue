@@ -1,7 +1,6 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import CardContent from '@/components/card-content.vue';
-import AuthLogin from '@/components/auth-login.vue';
 import AuthLogout from '@/components/auth-logout.vue';
 import getUserInfo from '../../assets/js/userInfo';
 
@@ -19,7 +18,6 @@ export default {
   },
   components: {
     CardContent,
-    AuthLogin,
     AuthLogout,
   },
   data() {
@@ -63,13 +61,6 @@ export default {
 
 <template>
   <div>
-    <div v-if="!this.user">
-      <AuthLogin provider="aad"></AuthLogin>
-      <AuthLogin provider="facebook"></AuthLogin>
-      <AuthLogin provider="github"></AuthLogin>
-      <AuthLogin provider="google"></AuthLogin>
-      <AuthLogin provider="twitter"></AuthLogin>
-    </div>
     <AuthLogout v-if="this.user">Logout</AuthLogout>
     <div v-if="errorMessage">{{ errorMessage }}</div>
     <div v-if="!icecreams.length && !errorMessage">

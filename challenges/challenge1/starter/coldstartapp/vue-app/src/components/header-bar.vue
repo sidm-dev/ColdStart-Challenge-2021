@@ -1,11 +1,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import HeaderBarBrand from '@/components/header-bar-brand.vue';
+import AuthLogout from '@/components/auth-logout.vue';
 
 export default {
   name: 'HeaderBar',
   components: {
     HeaderBarBrand,
+    AuthLogout,
   },
   data() {
     return {
@@ -25,15 +27,8 @@ export default {
       <HeaderBarBrand></HeaderBarBrand>
       <div class="navbar-menu">
         <div class="navbar-start">
-          <router-link class="navbar-item nav-home" to="/">Home</router-link>
-           <div v-if="!this.user">
-            <AuthLogin provider="aad"></AuthLogin>
-            <AuthLogin provider="facebook"></AuthLogin>
-            <AuthLogin provider="github"></AuthLogin>
-            <AuthLogin provider="google"></AuthLogin>
-            <AuthLogin provider="twitter"></AuthLogin>
-          </div>
-          <AuthLogout v-if="this.user">Logout</AuthLogout>
+          <router-link v-if="!this.user" class="navbar-item nav-home" to="/">Home</router-link>
+          <AuthLogout v-if="this.user" class="mt-6">Logout</AuthLogout>
         </div>
       </div>
     </nav>
