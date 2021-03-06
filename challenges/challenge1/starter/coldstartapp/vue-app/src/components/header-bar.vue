@@ -29,7 +29,7 @@ export default {
         <div class="navbar-start">
           <router-link class="navbar-item nav-home" to="/">Home</router-link>
           <router-link v-if="!this.user" class="navbar-item" to="/login">Login</router-link>
-          <AuthLogout v-if="this.user" class="mt-6">Logout</AuthLogout>
+          <AuthLogout v-if="this.user" class="navbar-item"></AuthLogout>
         </div>
       </div>
     </nav>
