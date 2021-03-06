@@ -1,3 +1,4 @@
+import getUserInfo from '../../assets/js/userInfo';
 import { SET_USER } from './mutation-types';
 
 const captains = console;
@@ -14,8 +15,9 @@ export default {
     },
   },
   actions: {
-    async setUserAction({ commit, payload }) {
+    async updateUserAction({ commit }) {
       try {
+        const payload = await getUserInfo();
         commit(SET_USER, payload);
         return payload;
       } catch (error) {

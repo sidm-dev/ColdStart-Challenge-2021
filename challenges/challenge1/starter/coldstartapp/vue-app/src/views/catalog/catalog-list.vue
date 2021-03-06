@@ -2,7 +2,6 @@
 import { mapActions, mapGetters } from 'vuex';
 import CardContent from '@/components/card-content.vue';
 import AuthLogout from '@/components/auth-logout.vue';
-import getUserInfo from '../../assets/js/userInfo';
 
 export default {
   name: 'CatalogList',
@@ -39,18 +38,17 @@ export default {
     };
   },
   async created() {
-    await this.upDateUser();
+    await this.updateUser();
   },
   computed: {
     ...mapGetters('user', { user: 'user' }),
   },
   methods: {
-    ...mapActions('user', ['setUserAction']),
-    async upDateUser() {
-      this.user = await getUserInfo();
+    ...mapActions('user', ['updateUserAction']),
+    async updateUser() {
       this.errorMessage = undefined;
       try {
-        await this.setUserAction(this.user);
+        await this.updateUserAction();
       } catch (error) {
         this.errorMessage = 'Unauthorized';
       }
@@ -61,7 +59,8 @@ export default {
 
 <template>
   <div>
-    <AuthLogout v-if="this.user">Logout</AuthLogout>
+    <AuthLogout>Login</AuthLogout>
+    <AuthLogout>Logout</AuthLogout>
     <div v-if="errorMessage">{{ errorMessage }}</div>
     <div v-if="!icecreams.length && !errorMessage">
       Loading data ...

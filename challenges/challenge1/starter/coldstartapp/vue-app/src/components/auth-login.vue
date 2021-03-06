@@ -1,4 +1,6 @@
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'AuthLogin',
   props: {
@@ -8,10 +10,12 @@ export default {
     },
   },
   methods: {
-    goAuth() {
-      const redirect = `post_login_redirect_uri=/`;
+    ...mapActions('user', ['updateUserAction']),
+    async goAuth() {
+      const redirect = `post_login_redirect_uri=/catalog`;
       const url = `/.auth/login/${this.provider}?${redirect}`;
       window.location.href = url;
+      await this.updateUserAction();
     },
   },
 };
