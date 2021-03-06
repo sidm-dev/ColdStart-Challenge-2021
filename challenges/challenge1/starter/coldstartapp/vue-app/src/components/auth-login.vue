@@ -20,7 +20,7 @@ export default {
 
 <template>
   <!--div class="auth-link" @click="goAuth">{{ provider }}</div-->
-  <button class="button is-medium m-4">
+  <button class="button is-medium mx-4" @click="goAuth">
     <span class="icon">
       <i v-if="provider=='facebook'" class="fab fa-facebook"></i>
       <i v-if="provider=='github'" class="fab fa-github"></i>
