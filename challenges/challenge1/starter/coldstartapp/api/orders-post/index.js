@@ -2,6 +2,8 @@ const { getUser } = require('../shared/user-utils');
 
 module.exports = async function (context, req) {
 
+  context.log("Something has happened. " + context.invocationId); 
+
   const { v4: uuidv4 } = require('uuid');
   let appInsights = require('applicationinsights');
   appInsights.setup().start(); //No need to pass key in setup as APPINSIGHTS_INSTRUMENTATIONKEY is already set up.
@@ -23,6 +25,8 @@ module.exports = async function (context, req) {
   const qConnMode = process.env.qConnMode;
 
   console.log(`qConnMode.........: ${qConnMode}`);
+  context.log(`qConnMode.........: ${qConnMode}`);
+
 
   let queueServiceClient = null;
 
@@ -92,6 +96,9 @@ module.exports = async function (context, req) {
 
     // Send a message into the queue using the sendMessage method.
     const sendMessageResponse = await queueClient.sendMessage(JSON.stringify(rbody));
+    context.log(
+      `Sent message successfully, service assigned message Id: ${sendMessageResponse.messageId}, service assigned request Id: ${sendMessageResponse.requestId}`
+    );
     console.log(
       `Sent message successfully, service assigned message Id: ${sendMessageResponse.messageId}, service assigned request Id: ${sendMessageResponse.requestId}`
     );
