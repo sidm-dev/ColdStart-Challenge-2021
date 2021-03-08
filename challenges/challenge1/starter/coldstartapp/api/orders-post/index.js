@@ -10,30 +10,49 @@ module.exports = async function (context, req) {
 
   //https://sidmdevcoldstartstore.queue.core.windows.net/sidm-dev-coldstart-pre-order-queue
 
-  const { QueueServiceClient } = require("@azure/storage-queue");
+  const { QueueServiceClient, StorageSharedKeyCredential  } = require("@azure/storage-queue");
 
-  const account = process.env["STORAGE_ACCOUNT"];
-  const saKey = process.env["SA_KEY"];
-  const sas = process.env["SAS_TOKEN"];
-  const queueName = process.env["SA_QUEUE_NAME"];
+  const account = process.env.STORAGE_ACCOUNT;
+  const queueName = process.env.SA_QUEUE_NAME;
 
-  const queueServiceClient = new QueueServiceClient(
-    `https://${account}.queue.core.windows.net${sas}`
-  );
+  const qConnMode = process.env.qConnMode;
 
-  console.log(`Queue.........: ${account}`);
-  console.log(`Queue1.........: ${sas}`);
-  console.log(`Queue2.........: ${queueName}`);
-  console.log(`user.........: ${user.userDetails}`);
-  console.log(`req.........: ${req.body.data.FullAddress}`);
+  console.log(`qConnMode.........: ${qConnMode}`);
 
-  //* Using Shared Access Key */
+  let queueServiceClient = null;
+
+  if (qConnMode == "CONNECTIONSTRING")
+  {
+    const AZURE_STORAGE_CONNECTIONSTRING = process.env.AZURE_STORAGE_CONNECTIONSTRING || "";
+
+    queueServiceClient = QueueServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTIONSTRING);
+  } else if (qConnMode == "SASignatureToken") {
+    const sas = process.env["SAS_TOKEN"];
+    queueServiceClient = new QueueServiceClient(`https://${account}.queue.core.windows.net${sas}`);
+  } else if (qConnMode == "SharedAccessKey") {
+    const saKey = process.env.SAS_KEY;
+
+    // Use StorageSharedKeyCredential with storage account and account key
+    // StorageSharedKeyCredential is only available in Node.js runtime, not in browsers
+    // *** Make sure you cutpaste the correct Key from Access Key in Azure rather than than sas. ***
+    const sharedKeyCredential = new StorageSharedKeyCredential(account, saKey);
+
+    queueServiceClient = new QueueServiceClient(`https://${account}.queue.core.windows.net`, 
+                              sharedKeyCredential);                    
+  }
+   //* Using Shared Access Key .....is this managed IDENETITY   ???????    */
   //const { DefaultAzureCredential } = require("@azure/identity");
   //const credential = new DefaultAzureCredential();
   //const queueServiceClient = new QueueServiceClient(
   //  `https://${account}.queue.core.windows.net`,
   //  credential
   //);
+
+  console.log(`Queue2.........: ${queueName}`);
+  console.log(`user.........: ${user.userDetails}`);
+  console.log(`req.........: ${req.body.data.FullAddress}`);
+
+ 
 
   //list Queues
   async function main1() {
