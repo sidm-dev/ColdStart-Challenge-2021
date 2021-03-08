@@ -2,6 +2,7 @@
 import { mapGetters } from 'vuex';
 import axios from 'axios';
 import API from '../store/config';
+import router from '../router';
 
 export default {
   name: 'order-form',
@@ -81,6 +82,7 @@ export default {
         .catch((error) => {
           currentObj.output1 = error;
         });
+      router.push({ name: 'catalog' });
     },
     reset_form() {
 
