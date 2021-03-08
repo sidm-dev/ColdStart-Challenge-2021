@@ -1,7 +1,6 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import CardContent from '@/components/card-content.vue';
-import AuthLogout from '@/components/auth-logout.vue';
 
 export default {
   name: 'CatalogList',
@@ -17,7 +16,6 @@ export default {
   },
   components: {
     CardContent,
-    AuthLogout,
   },
   data() {
     return {
@@ -59,8 +57,6 @@ export default {
 
 <template>
   <div>
-    <AuthLogout>Login</AuthLogout>
-    <AuthLogout>Logout</AuthLogout>
     <div v-if="errorMessage">{{ errorMessage }}</div>
     <div v-if="!icecreams.length && !errorMessage">
       Loading data ...

@@ -23,6 +23,12 @@ export default new Router({
       component: () => import(/* webpackChunkName: "login" */ './views/login.vue'),
     },
     {
+      path: '/order-form',
+      name: 'order-form',
+      props: true,
+      component: () => import(/* webpackChunkName: "order-form" */ './views/order-form.vue'),
+    },
+    {
       path: '*',
       component: PageNotFound,
     },
