@@ -55,7 +55,7 @@ module.exports = async function (context, req) {
 
   console.log(`Queue2.........: ${queueName}`);
   console.log(`user.........: ${user.userDetails}`);
-  console.log(`req.........: ${req.body.data.FullAddress}`);
+  console.log(`req.........: ${req.body.FullAddress}`);
 
  
 
@@ -88,17 +88,16 @@ module.exports = async function (context, req) {
   async function main3(rbody) {
     const queueClient = queueServiceClient.getQueueClient(queueName);
 
-    
-    const id = uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+    rbody.Id = uuidv4();
 
     // Send a message into the queue using the sendMessage method.
-    const sendMessageResponse = await queueClient.sendMessage(rbody);
+    const sendMessageResponse = await queueClient.sendMessage(JSON.stringify(rbody));
     console.log(
       `Sent message successfully, service assigned message Id: ${sendMessageResponse.messageId}, service assigned request Id: ${sendMessageResponse.requestId}`
     );
   }
 
-  main3(req.body.data);
+  main3(req.body);
 
   context.res.status(201);
 };
