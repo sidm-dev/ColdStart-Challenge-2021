@@ -12,10 +12,10 @@ module.exports = async function (context, req) {
 
   const { QueueServiceClient } = require("@azure/storage-queue");
 
-   const account = process.env["STORAGE_ACCOUNT"];
-   const saKey = process.env["SA_KEY"];
-   const sas = process.env["SAS_TOKEN"];
-   const queueName = process.env["SA_QUEUE_NAME"];
+  const account = process.env["STORAGE_ACCOUNT"];
+  const saKey = process.env["SA_KEY"];
+  const sas = process.env["SAS_TOKEN"];
+  const queueName = process.env["SA_QUEUE_NAME"];
 
   const queueServiceClient = new QueueServiceClient(
     `https://${account}.queue.core.windows.net${sas}`
@@ -25,7 +25,7 @@ module.exports = async function (context, req) {
   console.log(`Queue1.........: ${sas}`);
   console.log(`Queue2.........: ${queueName}`);
   console.log(`user.........: ${user.userDetails}`);
-  console.log(`req.........: ${req.body.name}`);
+  console.log(`req.........: ${req.body.data.FullAddress}`);
 
   //* Using Shared Access Key */
   //const { DefaultAzureCredential } = require("@azure/identity");
@@ -70,7 +70,7 @@ module.exports = async function (context, req) {
     );
   }
 
-  main3(req.body);
+  main3(req.body.data);
 
   context.res.status(201);
 };
