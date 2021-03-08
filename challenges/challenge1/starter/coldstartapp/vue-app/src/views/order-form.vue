@@ -66,15 +66,13 @@ export default {
       await axios
         .post(`${API}/orders`,
           {
-            data: JSON.stringify({
-              Id: '0B476647-586A-EB11-9889-000(D3AB17657', // TODO npm install uuid and use it here.
-              Date: this.now,
-              IcecreamId: this.name,
-              Status: 'New',
-              DriverId: null,
-              FullAddress: this.fullAddress,
-              LastPosition: null,
-            }),
+            Id: '',
+            Date: this.now,
+            IcecreamId: this.name,
+            Status: 'New',
+            DriverId: null,
+            FullAddress: this.fullAddress,
+            LastPosition: null,
           })
         .then((response) => {
           currentObj.output1 = response.data;

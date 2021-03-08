@@ -1,6 +1,11 @@
 const { getUser } = require('../shared/user-utils');
 
 module.exports = async function (context, req) {
+
+  const { v4: uuidv4 } = require('uuid');
+  let appInsights = require('applicationinsights');
+  appInsights.setup().start(); //No need to pass key in setup as APPINSIGHTS_INSTRUMENTATIONKEY is already set up.
+
   // Get the user details from the request
   const user = getUser(req);
 
@@ -82,6 +87,10 @@ module.exports = async function (context, req) {
 
   async function main3(rbody) {
     const queueClient = queueServiceClient.getQueueClient(queueName);
+
+    
+    const id = uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+
     // Send a message into the queue using the sendMessage method.
     const sendMessageResponse = await queueClient.sendMessage(rbody);
     console.log(
