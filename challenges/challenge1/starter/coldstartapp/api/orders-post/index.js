@@ -32,13 +32,19 @@ module.exports = async function (context, req) {
 
   if (qConnMode == "CONNECTIONSTRING")
   {
+    context.log(`qConnMode_CONN.........: ${qConnMode}`);
+
     const AZURE_STORAGE_CONNECTIONSTRING = process.env.AZURE_STORAGE_CONNECTIONSTRING || "";
 
     queueServiceClient = QueueServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTIONSTRING);
   } else if (qConnMode == "SASignatureToken") {
+    context.log(`qConnModeSAS.........: ${qConnMode}`);
+
     const sas = process.env["SAS_TOKEN"];
     queueServiceClient = new QueueServiceClient(`https://${account}.queue.core.windows.net${sas}`);
   } else if (qConnMode == "SharedAccessKey") {
+    context.log(`qConnModeKEY.........: ${qConnMode}`);
+
     const saKey = process.env.SAS_KEY;
 
     // Use StorageSharedKeyCredential with storage account and account key
@@ -79,6 +85,9 @@ module.exports = async function (context, req) {
   async function main2() {
     const queueClient = queueServiceClient.getQueueClient(queueName);
     const createQueueResponse = await queueClient.create();
+    context.log(
+      `Created queue ${queueName} successfully, service assigned request Id: ${createQueueResponse.requestId}`
+    );
     console.log(
       `Created queue ${queueName} successfully, service assigned request Id: ${createQueueResponse.requestId}`
     );
