@@ -101,7 +101,7 @@ module.exports = async function (context, req) {
   async function main3(rbody) {
     const queueClient = queueServiceClient.getQueueClient(queueName);
 
-    rbody.Id = uuidv4();
+    rbody.Id = `${ uuidv4() }`;
 
     // Send a message into the queue using the sendMessage method.
     const sendMessageResponse = await queueClient.sendMessage(JSON.stringify(rbody));
