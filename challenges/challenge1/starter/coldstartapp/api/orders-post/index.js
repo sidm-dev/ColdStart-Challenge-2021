@@ -2,8 +2,6 @@ const { getUser } = require('../shared/user-utils');
 
 module.exports = async function (context, req) {
 
-  context.log("Something has happened. " + context.invocationId); 
-
   const { v4:uuid } = require('uuid');
   
   req.body.Id = `${ uuid() }`;
