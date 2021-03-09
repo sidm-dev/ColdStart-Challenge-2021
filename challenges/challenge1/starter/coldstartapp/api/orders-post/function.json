@@ -12,6 +12,13 @@
       "type": "http",
       "direction": "out",
       "name": "res"
+    },
+    {
+      "type": "queue",
+      "direction": "out",
+      "name": "myQueueItem",
+      "queueName": "sidm-dev-coldstart-pre-order-queue",
+      "connection": "AZURE_STORAGE_CONNECTIONSTRING"
     }
   ]
 }
