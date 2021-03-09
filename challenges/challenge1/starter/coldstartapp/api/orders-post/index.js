@@ -4,9 +4,9 @@ module.exports = async function (context, req) {
 
   context.log("Something has happened. " + context.invocationId); 
 
-  const { v4: uuidv4 } = require('uuid');
+  const { uuid } = require('uuid');
   
-  req.body.Id = `${ uuidv4() }`;
+  req.body.Id = `${ uuid.v4() }`;
 
   const order = req.body;
 
